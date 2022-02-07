@@ -31,31 +31,17 @@ namespace Data_WebApplication2.Controllers
 
         public IActionResult Index()
         {
-            PersonDetailViewModel viewModels   = new PersonDetailViewModel();
 
-           
-            foreach (var item in People)
-            {
-                viewModels.PeopleViewModel.Add(new PeopleViewModel
-                {
-                    Id = item.Id,   
-                    Name = item.Name,
-                    PhoneNumber = item.PhoneNumber,
-                    City = item.City,   
-                    });
-            }
-         
-            return View(viewModels);
-        }
-        [HttpPost]
-        public IActionResult Index(string query)
-        {
+            //Person Pr = new Person();
+            //Pr.Name = People[0].Name;
+            //Pr.PhoneNumber = People[0].PhoneNumber;
+            //Pr.City = People[0].City;
+
+
             PersonDetailViewModel viewModels = new PersonDetailViewModel();
 
 
-            var filteredData = People.Where(x => x.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || x.City.Contains(query, StringComparison.OrdinalIgnoreCase) || x.PhoneNumber.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            foreach (var item in filteredData)
+            foreach (var item in People)
             {
                 viewModels.PeopleViewModel.Add(new PeopleViewModel
                 {
@@ -65,8 +51,35 @@ namespace Data_WebApplication2.Controllers
                     City = item.City,
                 });
             }
-            
+
             return View(viewModels);
+        }
+        [HttpPost]
+        public IActionResult Index(string query)
+        {
+            if(query != null)
+            {
+                PersonDetailViewModel viewModels = new PersonDetailViewModel();
+
+
+                var filteredData = People.Where(x => x.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || x.City.Contains(query, StringComparison.OrdinalIgnoreCase) || x.PhoneNumber.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                foreach (var item in filteredData)
+                {
+                    viewModels.PeopleViewModel.Add(new PeopleViewModel
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        PhoneNumber = item.PhoneNumber,
+                        City = item.City,
+                    });
+                }
+
+                return View(viewModels);
+            }
+            else
+                return RedirectToAction("Index");
+
         }
 
         [HttpPost]

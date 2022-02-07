@@ -1,5 +1,6 @@
 ﻿@model Data_WebApplication2.ViewModels.PersonDetailViewModel
 @using Data_WebApplication2.ViewModels;
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -16,7 +17,7 @@
 <form asp-controller="Home" asp-action="Index" method="post">
 
     @Html.Label("Search: ")
-    <input type="text" maxlength="20" name="query">
+    <input type="text"  maxlength="20" name="query">
     <br>
 
     <p></p>
@@ -38,34 +39,17 @@
 
 </form>
 <h4>List of People (total persons in list are @Model.PeopleViewModel.Count)</h4>
-<table class="table">
-    <tr>
-        @*<th>ID</th>*@
-        <th>Name</th>
-        <th>PhoneNumber</th>
-        <th>City</th>
-        <th>Operation</th>
-    </tr>
-    @foreach (var people in Model.PeopleViewModel)
-    {
-        <tr>
-            @*<td>    @people.Id</td>*@
-            <td>    @people.Name</td>
-            <td>    @people.PhoneNumber</td>
-            <td>    @people.City</td>
-            <td>
-                @Html.ActionLink("Delete","Delete","Home", new{id=@people.Id})
 
-            </td>
-            @*  <td> <input type="submit" value="Delete" id = "DeletePerson"/></td>*@
-        </tr>
-    }
+@foreach (var people in Model.PeopleViewModel)
+{
 
-</table>
-
+    <partial name = "_PersonViewPartial" model = "people" />
+  
+   
+}
 <form asp-controller="Home" asp-action="Sort" method="post">
 
-    
+
     <input type="submit" value="Sort List" id="Sort" />
 
 

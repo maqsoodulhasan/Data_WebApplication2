@@ -1,6 +1,17 @@
-﻿@{
+﻿@model Data_WebApplication2.ViewModels.PersonDetailViewModel
+
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+
+
+@foreach (var people in Model.PeopleViewModel)
+{
+
+    <partial name = "_PersonViewPartial" model = "people" />
+  
+   
+}
