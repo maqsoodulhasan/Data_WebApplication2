@@ -11,6 +11,9 @@ a.navbar-brand {
 a {
   color: #0366d6;
 }
+#peoplelist {
+    border: 1px solid black;
+}
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;

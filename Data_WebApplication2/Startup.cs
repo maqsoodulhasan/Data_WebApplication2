@@ -51,6 +51,12 @@ namespace Data_WebApplication2
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                   //added  route here for SPA page AjaxIndexview from Ajaxcontroller 
+                   name: "SPA",
+                   pattern: "SPA",
+                   defaults: new { controller = "AjaxController", Action = "AjaxIndex" });
             });
         }
     }

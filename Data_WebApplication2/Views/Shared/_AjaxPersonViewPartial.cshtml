@@ -1,0 +1,19 @@
+﻿@model Data_WebApplication2.ViewModels.PersonDetailViewModel
+@using Data_WebApplication2.ViewModels;
+
+@foreach (var item in Model.PeopleViewModel)
+{
+<div class="container">
+        <div class="row">
+            <div class="col-sm">
+                @item.Name
+            </div>
+            <div class="col-sm">
+                @item.PhoneNumber
+            </div>
+            <div class="col-sm">
+                @item.City
+            </div>
+        </div>
+    </div>    
+}

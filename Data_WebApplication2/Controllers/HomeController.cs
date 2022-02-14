@@ -32,12 +32,6 @@ namespace Data_WebApplication2.Controllers
         public IActionResult Index()
         {
 
-            //Person Pr = new Person();
-            //Pr.Name = People[0].Name;
-            //Pr.PhoneNumber = People[0].PhoneNumber;
-            //Pr.City = People[0].City;
-
-
             PersonDetailViewModel viewModels = new PersonDetailViewModel();
 
 
@@ -79,7 +73,6 @@ namespace Data_WebApplication2.Controllers
             }
             else
                 return RedirectToAction("Index");
-
         }
 
         [HttpPost]
@@ -89,7 +82,6 @@ namespace Data_WebApplication2.Controllers
             return RedirectToAction("Index");
         }
            
-
         [HttpPost]
         public IActionResult AddPerson(PersonDetailViewModel model)
         {

@@ -1,0 +1,74 @@
+﻿@model Data_WebApplication2.ViewModels.PersonDetailViewModel
+@using Data_WebApplication2.ViewModels;
+
+<link rel="stylesheet" href="~/css/site.css" type="text/css" />
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
+
+<p> Index page from ajax controller to show list of people</p>
+
+<button type="button" class="btn btn-primary" id="people">People</button>
+<input type="number" id="query">
+<button type="button" class="btn btn-secondary" id="details">Details</button>
+<button type="button" class="btn btn-success" id="delete">Delete</button>
+
+<h4>Click People button to get List of People </h4>
+
+<div id="peoplelist">
+</div>
+<div id="details">
+</div>
+<div id="delete">
+</div>
+
+@section Scripts {
+<script>
+
+    $(document).ready(function () {
+
+        $('#delete').on('click', function () {
+        const myElement = document.getElementById("query");
+        $.ajax({
+            type:"POST",
+            url: "/Ajax/GetDelete?id="+myElement.value,
+            success : function (response) {
+                if(response==true)
+                {
+                 $("#peoplelist").load("/Ajax/GetPeople");
+                 alert("Record deleted successfully");
+                }
+                else
+                {
+                    alert("Record does not exist");
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        });
+
+        $('#people').on('click', function () {
+            console.log("getpeople action method");
+           $("#peoplelist").load("/Ajax/GetPeople");
+
+        });
+
+         $('#details').on('click', function () {
+              const myElement = document.getElementById("query");
+             console.log(myElement.value);
+             console.log("getdetail action method");
+            $("#peoplelist").load("/Ajax/GetDetails?id="+myElement.value);
+        });
+        });
+
+</script>
+}
+
